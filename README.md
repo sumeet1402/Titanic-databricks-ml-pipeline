@@ -86,7 +86,6 @@ The project also explores:
 
 ## Repository Structure
 
-```text
 titanic-databricks-ml-pipeline/
 │
 ├── notebooks/
@@ -104,7 +103,7 @@ titanic-databricks-ml-pipeline/
 │   └── 12_Prediction.ipynb
 │
 ├── README.md
-└── requirements.txt
+└── requirements.txts
 
 ## Dataset
 
