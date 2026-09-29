@@ -105,3 +105,11 @@ titanic-databricks-ml-pipeline/
 │
 ├── README.md
 └── requirements.txt
+
+## Dataset
+
+The project uses the Titanic passenger dataset containing information such as passenger class, age, sex, family information, fare, cabin, and embarkation point.
+
+## Author
+
+**Sumeet Mandhre**
