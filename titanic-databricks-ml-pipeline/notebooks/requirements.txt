@@ -1,11 +1,5 @@
-
-### 3. Save it
-
-Press **Ctrl + S**.
-
-Your project should now have:
-
-```text
-titanic-databricks-ml-pipeline/
-├── notebooks/
-└── README.md
+pandas
+numpy
+matplotlib
+scikit-learn
+pyspark
