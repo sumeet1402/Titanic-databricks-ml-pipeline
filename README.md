@@ -41,10 +41,23 @@ The project uses **Logistic Regression** to predict whether a passenger survived
 
 ### Model Performance
 
-- Accuracy: 82.68%
-- Precision: 78.67%
-- Recall: 79.73%
-- F1-Score: 79.19%
+The model was evaluated on a held-out test set.
+
+- Accuracy: **82.68%**
+- Precision: **78.67%**
+- Recall: **79.73%**
+- F1-Score: **79.19%**
+
+## Prediction
+
+The trained Logistic Regression model can generate both class predictions and survival probabilities using `predict()` and `predict_proba()`.
+
+### Example Predictions
+
+- **Passenger 1:** 91.56% probability of survival
+- **Passenger 2:** 6.35% probability of survival
+
+The probability represents the model's estimated probability for each prediction class.
 
 ## Feature Engineering
 
