@@ -1,9 +1,9 @@
 # Titanic-databricks-ml-pipeline
 End-to-end Titanic survival prediction pipeline built with Python and Databricks, including Delta Lake, SQL, feature engineering, and machine learning model comparison.
 
-# 🚢 Titanic Survival Prediction — End-to-End Machine Learning Project
+# Titanic Survival Prediction — End-to-End Machine Learning Project
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 ### Programming Languages
 
@@ -36,7 +36,7 @@ End-to-end Titanic survival prediction pipeline built with Python and Databricks
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 Titanic-ML-Project/
@@ -63,7 +63,7 @@ Titanic-ML-Project/
 
 ---
 
-## 🔎 Dataset
+## Dataset
 
 The project uses the **Titanic dataset**, containing information about **891 passengers**.
 
@@ -85,7 +85,7 @@ The project uses the **Titanic dataset**, containing information about **891 pas
 
 ---
 
-## 🧹 Data Exploration & Cleaning
+## Data Exploration & Cleaning
 
 The dataset was explored using:
 
@@ -103,7 +103,7 @@ Missing values were handled before building the Machine Learning model.
 
 ---
 
-## ⚙️ Feature Engineering
+## Feature Engineering
 
 Several new features were created to improve the model.
 
@@ -155,7 +155,7 @@ Missing cabin information was grouped into an `Unknown` category.
 
 ---
 
-## 🔢 Feature Encoding
+## Feature Encoding
 
 Categorical features were converted into numerical form using **One-Hot Encoding**.
 
@@ -182,7 +182,7 @@ This allows categorical information to be used by the Machine Learning model.
 
 ---
 
-## ✂️ Train/Test Split
+## Train/Test Split
 
 The dataset was divided into training and testing sets.
 
@@ -196,7 +196,7 @@ The training dataset was used to train the model, while the testing dataset was 
 
 ---
 
-## 🤖 Machine Learning Model
+## Machine Learning Model
 
 ### Logistic Regression
 
@@ -217,7 +217,7 @@ Logistic Regression was selected because the target variable is binary:
 
 ---
 
-## 📊 Model Evaluation
+## Model Evaluation
 
 The model was evaluated using:
 
@@ -240,7 +240,7 @@ The project focuses not only on the final accuracy but also on understanding the
 
 ---
 
-## 🗄️ Databricks & Delta Lake
+## Databricks & Delta Lake
 
 The project also explored important Databricks and Delta Lake concepts, including:
 
@@ -273,7 +273,7 @@ This approach separates raw, cleaned, and analysis-ready data.
 
 ---
 
-## 📈 Key Learning Outcomes
+## Key Learning Outcomes
 
 Through this project, I practiced:
 
@@ -299,7 +299,7 @@ Through this project, I practiced:
 
 ---
 
-## 🚀 Future Improvements
+##Future Improvements
 
 Possible improvements include:
 
@@ -315,7 +315,7 @@ Possible improvements include:
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Sumeet Mandhre**
 
@@ -332,7 +332,7 @@ B.Tech — Computer Engineering
 
 ---
 
-## ⭐ Project
+## Project
 
 This project was created as a hands-on learning project to understand and implement an end-to-end Machine Learning workflow using:
 
