@@ -676,8 +676,6 @@ with a test accuracy of:
 82.68%
 ```
 
-##Final Result:
-
 | Model | Accuracy | Precision | Recall | F1 |
 |---|---:|---:|---:|---:|
 | Logistic Regression | **82.68%** | 78.67% | **79.73%** | **79.19%** |
