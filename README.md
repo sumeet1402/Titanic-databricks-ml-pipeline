@@ -676,6 +676,13 @@ with a test accuracy of:
 82.68%
 ```
 
+Final Result:
+| Model | Accuracy | Precision | Recall | F1 |
+|---|---:|---:|---:|---:|
+| Logistic Regression | **82.68%** | 78.67% | **79.73%** | **79.19%** |
+| Decision Tree | 80.45% | 76.71% | 75.68% | 76.19% |
+| Random Forest | **82.68%** | **81.16%** | 75.68% | 78.32% |
+
 The project combines Machine Learning, Data Engineering, Databricks, Apache Spark, and Delta Lake into an end-to-end pipeline.
 
 ## Future Improvements
