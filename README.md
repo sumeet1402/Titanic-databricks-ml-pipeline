@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://titanic-databricks-ml-pipeline-whqwha8bhpnfpwahegjm4w.streamlit.app/">
-    <img src="assets/Titanic Machine Learning Hero Banner.png"
+    <img src="assets/Titanic_Machine_Learning_Hero_Banner.png"
          alt="Titanic Survival Prediction — Try the Live App"
          width="100%">
   </a>
