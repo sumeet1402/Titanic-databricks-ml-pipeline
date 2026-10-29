@@ -17,9 +17,6 @@ An end-to-end machine learning project using Python, Scikit-learn, Databricks Mo
 
 ---
 
-
-An end-to-end Machine Learning and Data Engineering project using the Titanic dataset, built with Python, PySpark, Databricks, Delta Lake, Pandas, Scikit-learn, Matplotlib, and Seaborn.
-
 The project covers the complete workflow from data collection and exploration to feature engineering, model training, evaluation, model comparison, and prediction.
 
 Three classification models were trained and compared:
