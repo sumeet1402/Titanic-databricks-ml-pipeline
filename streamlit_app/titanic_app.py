@@ -728,11 +728,10 @@ if submitted:
             "and the serving endpoint status, then try again."
         )
 
-    except (KeyError, ValueError, IndexError, TypeError):
+    except (KeyError, ValueError, IndexError, TypeError) as exc:
         st.error(
-            "The prediction response could not be interpreted. "
-            "Check the endpoint response and feature schema."
-        )
+            f"Prediction processing error ({type(exc).__name__}): {exc}"
+    )
 
     except Exception as exc:
         # Show useful diagnostics without displaying client secrets or access tokens.
