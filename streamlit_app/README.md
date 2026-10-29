@@ -1,5 +1,9 @@
 # Titanic Survival Predictor
 
+## 🚀 Live Demo
+
+[Open Titanic Survival Predictor](YOUR_STREAMLIT_APP_URL)
+
 A machine learning web application that predicts Titanic passenger survival using a trained Logistic Regression model deployed through Databricks Model Serving.
 
 Users can enter passenger details in a Streamlit interface and receive a prediction from the deployed model.
