@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://titanic-databricks-ml-pipeline-whqwha8bhpnfpwahegjm4w.streamlit.app/">
-    <img src="https://img.shields.io/badge/🚀_TRY_THE_LIVE_APP-Click_to_Predict_Survival-2ea44f?style=for-the-badge&logo=streamlit&logoColor=white" alt="Try the Live Titanic Survival Predictor">
+    <img src="https://img.shields.io/badge/_TRY_THE_LIVE_APP-Click_to_Predict_Survival-2ea44f?style=for-the-badge&logo=streamlit&logoColor=white" alt="Try the Live Titanic Survival Predictor">
   </a>
 </p>
 
