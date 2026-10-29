@@ -1,17 +1,20 @@
-# Titanic — End-to-End Machine Learning Pipeline
+# Titanic Databricks ML Pipeline
 
-An end-to-end Machine Learning and Data Engineering project using the Titanic dataset, built with Python, PySpark, Databricks, Delta Lake, Pandas, Scikit-learn, Matplotlib, and Seaborn.
+An end-to-end Machine Learning and Data Engineering project using the Titanic dataset, built with Python, SQL, Databricks, Apache Spark, Delta Lake, Pandas, Scikit-learn, Matplotlib, Seaborn, and MLflow.
 
-The project covers the complete workflow from data collection and exploration to feature engineering, model training, evaluation, model comparison, and prediction.
+The project covers the complete workflow from data collection and exploration to feature engineering, model training, evaluation, experiment tracking, model comparison, and prediction.
 
 Three classification models were trained and compared:
+
 - Logistic Regression
 - Decision Tree
 - Random Forest
 
+**Random Forest is currently the best-performing model by test accuracy**, based on the recorded results from the latest model runs.
+
 ## Project Overview
 
-The objective is to predict whether a passenger survived the Titanic disaster based on passenger information such as passenger class, gender, age, family information, fare, embarkation port, cabin information, and passenger title.
+The objective is to predict whether a passenger survived the Titanic disaster using passenger information such as passenger class, gender, age, family information, fare, embarkation port, cabin information, and passenger title.
 
 Target variable:
 
@@ -35,6 +38,7 @@ Since the target contains two classes, this is a binary classification problem.
 - Matplotlib
 - Seaborn
 - Scikit-learn
+- MLflow
 
 ### Data Engineering and Big Data
 - Apache Spark
@@ -45,6 +49,7 @@ Since the target contains two classes, this is a binary classification problem.
 ### Tools
 - Git
 - GitHub
+- MLflow Tracking
 
 ## Project Structure
 
@@ -65,6 +70,7 @@ titanic-databricks-ml-pipeline/
 ├── 12_Prediction
 ├── 13_Decision_Tree
 ├── 14_Random_Forest
+├── 15_MLflow_Model_Tracking_and_Comparison
 │
 ├── README.md
 └── requirements.txt
@@ -76,22 +82,16 @@ titanic-databricks-ml-pipeline/
 Kaggle Titanic Dataset
         |
         v
-Data Collection
+Data Collection and Exploration
         |
         v
-Data Exploration
-        |
-        v
-Statistics and Distribution
-        |
-        v
-Data Visualization
+Statistics and Visualization
         |
         v
 Outlier Detection
         |
         v
-Databricks / Delta Lake
+Databricks and Delta Lake
         |
         v
 Feature Engineering
@@ -109,7 +109,13 @@ Model Training
 Model Evaluation
         |
         v
+MLflow Experiment Tracking
+        |
+        v
 Model Comparison
+        |
+        v
+Best Model Selection
         |
         v
 Prediction
@@ -119,7 +125,7 @@ Prediction
 
 The Titanic dataset was obtained from Kaggle.
 
-The dataset contains 891 rows and 12 columns.
+The original dataset contains 891 rows and 12 columns.
 
 Main columns include:
 
@@ -143,9 +149,9 @@ The dataset was loaded into Databricks for further processing.
 ## 2. Data Exploration
 
 Initial exploration was performed to understand:
+
 - Dataset shape
-- Column names
-- Data types
+- Column names and data types
 - Missing values
 - Unique values
 - Statistical information
@@ -163,17 +169,13 @@ df.describe()
 
 ## 3. Statistics and Distribution
 
-Statistical analysis was performed using:
-- Mean
-- Median
-- Mode
-- Variance
-- Standard deviation
-- Minimum
-- Maximum
+Statistical analysis included:
+
+- Mean, median, and mode
+- Variance and standard deviation
+- Minimum and maximum
 - Quartiles
-- Skewness
-- Kurtosis
+- Skewness and kurtosis
 
 Example:
 
@@ -181,11 +183,12 @@ Example:
 df.describe()
 ```
 
-This helped understand numerical variables such as Age, Fare, SibSp, and Parch.
+This helped explain the distributions of numerical variables such as `Age`, `Fare`, `SibSp`, and `Parch`.
 
 ## 4. Data Visualization
 
 Visualizations included:
+
 - Bar charts
 - Pie charts
 - Histograms
@@ -194,6 +197,7 @@ Visualizations included:
 - Distribution plots
 
 Examples of analysis:
+
 - Survival by gender
 - Passenger class distribution
 - Age distribution
@@ -202,9 +206,7 @@ Examples of analysis:
 
 ## 5. Outlier Detection
 
-Box plots were used to identify potential outliers.
-
-Outlier analysis was performed using the IQR (Interquartile Range) method.
+Box plots and the Interquartile Range (IQR) method were used to identify potential outliers.
 
 ```text
 IQR = Q3 - Q1
@@ -217,11 +219,10 @@ Potential outliers were analyzed before proceeding with feature engineering.
 
 ## 6. Databricks and Delta Lake
 
-The project was developed using Databricks.
+Databricks was used as the development environment for data processing and machine learning.
 
-Delta Lake was used for storing and managing processed datasets.
+Delta Lake concepts explored included:
 
-The project explored:
 - Delta Tables
 - Table History
 - Table Versions
@@ -242,15 +243,15 @@ New features were created from the existing Titanic data.
 
 ### FamilySize
 
-```python
+```text
 FamilySize = SibSp + Parch + 1
 ```
 
 ### IsAlone
 
 ```text
-IsAlone = 1  when FamilySize = 1
-IsAlone = 0  otherwise
+IsAlone = 1 when FamilySize = 1
+IsAlone = 0 otherwise
 ```
 
 ### Title
@@ -278,7 +279,7 @@ Senior
 
 ### FamilySizeGroup
 
-Family size was grouped into:
+Family sizes were grouped into:
 
 ```text
 Alone
@@ -289,7 +290,7 @@ Large
 
 ### Cabin Deck
 
-The first character of Cabin was extracted to represent the cabin deck. Missing cabin values were grouped as `Unknown`.
+The first character of the cabin value was extracted to represent the cabin deck. Missing cabin values were grouped as `Unknown`.
 
 ## 8. Feature Encoding
 
@@ -303,6 +304,8 @@ Female = 1
 ```
 
 ### Embarked
+
+One-hot encoded columns:
 
 ```text
 Embarked_C
@@ -320,16 +323,7 @@ Title_Mrs
 Title_Other
 ```
 
-### Age Group
-
-```text
-AgeGroup_Child
-AgeGroup_Teen
-AgeGroup_Adult
-AgeGroup_Senior
-```
-
-Family size groups and cabin decks were also one-hot encoded.
+Age groups, family-size groups, and cabin decks were also encoded into numerical features.
 
 ## 9. Train-Test Split
 
@@ -344,7 +338,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 ```
 
-Result:
+Recorded split sizes:
 
 ```text
 Training samples: 712
@@ -357,53 +351,28 @@ The target variable was `Survived`.
 
 ### Logistic Regression
 
-Logistic Regression was used because Titanic is a binary classification problem.
-
-The model calculates the probability of belonging to class 1.
-
-A threshold of 0.5 is generally used:
-
-```text
-Probability >= 0.5 → 1
-Probability < 0.5  → 0
-```
-
-Example:
-
-```text
-Probability = 0.91 → Prediction = 1
-Probability = 0.06 → Prediction = 0
-```
-
-Model:
+Logistic Regression was used as a baseline binary classification model.
 
 ```python
 LogisticRegression(max_iter=1000)
 ```
 
-### Decision Tree
-
-A Decision Tree makes predictions using learned decision rules based on feature values.
-
-A simplified example:
+It estimates the probability of a passenger belonging to class `1`. With the usual 0.5 threshold:
 
 ```text
-Is Sex = Female?
-       |
-      Yes
-       |
-Is Pclass <= 2?
-       |
-      Yes
-       |
-Prediction = 1
+Probability >= 0.5 → Prediction = 1
+Probability < 0.5  → Prediction = 0
 ```
+
+### Decision Tree
+
+A Decision Tree learns decision rules from feature values to predict the target class.
 
 ### Random Forest
 
 Random Forest is an ensemble learning algorithm that combines predictions from multiple decision trees.
 
-Model configuration:
+Recorded model configuration:
 
 ```python
 RandomForestClassifier(
@@ -417,74 +386,89 @@ RandomForestClassifier(
 ## 11. Model Evaluation
 
 The models were evaluated using:
+
 - Accuracy
 - Precision
 - Recall
-- F1 Score
-- Confusion Matrix
+- F1-score
+- Confusion matrix
 
 ### Accuracy
 
 ```text
-Accuracy =
 Correct Predictions / Total Predictions
 ```
 
 ### Precision
 
 ```text
-Precision =
-True Positives /
-(True Positives + False Positives)
+True Positives / (True Positives + False Positives)
 ```
 
 ### Recall
 
 ```text
-Recall =
-True Positives /
-(True Positives + False Negatives)
+True Positives / (True Positives + False Negatives)
 ```
 
-### F1 Score
+### F1-score
 
 ```text
-F1 =
-2 × (Precision × Recall) /
-(Precision + Recall)
+2 × (Precision × Recall) / (Precision + Recall)
 ```
 
-## Model Comparison
+## 12. Model Comparison
 
-Results on the test dataset:
+The following table summarizes the recorded results from the latest model runs.
 
-| Model | Accuracy | Precision | Recall | F1 Score |
+| Model | Accuracy | Precision | Recall | F1-score |
 |---|---:|---:|---:|---:|
-| Logistic Regression | 82.68% | 78.67% | 79.73% | 79.19% |
-| Decision Tree | 80.45% | 76.71% | 75.68% | 76.19% |
-| Random Forest | 82.68% | 81.16% | 75.68% | 78.32% |
+| Logistic Regression | 82.12% | 77.63% | 79.73% | 78.67% |
+| Decision Tree | 80.40% | 76.71% | 75.68% | 76.19% |
+| Random Forest | **82.70%** | **81.20%** | 75.68% | 78.30% |
 
-## Model Selection
+*Metrics are rounded to two decimal places. These results reflect the recorded runs and should be compared using consistent data, features, and train-test splits.*
 
-For this particular train-test split:
-- Logistic Regression and Random Forest achieved the same accuracy: 82.68%.
-- Random Forest achieved higher precision.
-- Logistic Regression achieved higher recall.
-- Logistic Regression achieved a higher F1 score.
+## 13. Model Selection
 
-Therefore, Logistic Regression was selected as the final model for this project.
+**Random Forest is the current best model by accuracy**, with a recorded test accuracy of approximately 82.70%.
 
-Model selection depends on the evaluation metric and business requirement. The choice of Logistic Regression here is based on the results obtained from this particular test split.
+Reasons for considering Random Forest:
 
-## 12. Prediction
+- Highest recorded accuracy among the three models.
+- Highest recorded precision.
+- Combines multiple decision trees to produce predictions.
 
-After training the final model, predictions were generated for new passenger data.
+Logistic Regression achieved higher recall, meaning it identified a larger proportion of actual survivors in the recorded test results. The preferred model ultimately depends on the evaluation metric and project requirements.
 
-The model returns probabilities for both classes:
+Random Forest is the current candidate for further validation and potential deployment.
 
-```text
-[Probability of 0, Probability of 1]
-```
+## 14. MLflow Experiment Tracking
+
+MLflow was introduced to track and compare machine learning experiments in Databricks.
+
+The project logs runs for:
+
+- Logistic Regression
+- Decision Tree
+- Random Forest
+
+Recorded parameters include model settings and train-test split configuration. Logged metrics include:
+
+- Accuracy
+- Precision
+- Recall
+- F1-score
+
+Model artifacts are also logged for the tracked runs.
+
+MLflow makes it easier to compare experiments, inspect parameters and metrics, and identify promising models without relying only on notebook outputs.
+
+## 15. Prediction
+
+After training, models can generate predictions for passenger data.
+
+For a classifier that supports `predict_proba()`, the output represents the estimated probabilities for the classes.
 
 Example:
 
@@ -492,18 +476,14 @@ Example:
 [[0.084, 0.916]]
 ```
 
-This means:
+This indicates estimated probabilities of:
 
 ```text
 Probability of not surviving = 8.4%
 Probability of surviving     = 91.6%
 ```
 
-Since the probability of class 1 is greater than 0.5:
-
-```text
-Prediction = 1
-```
+With a 0.5 threshold, the predicted class would be `1`.
 
 Another example:
 
@@ -511,101 +491,50 @@ Another example:
 [[0.936, 0.064]]
 ```
 
-means:
+This produces a predicted class of `0`.
 
-```text
-Probability of not surviving = 93.6%
-Probability of surviving     = 6.4%
-```
-
-Therefore:
-
-```text
-Prediction = 0
-```
-
-## How Does the Model Predict 0 or 1?
-
-For Logistic Regression:
-
-```text
-Passenger Features
-       |
-       v
-Trained Model
-       |
-       v
-Probability of Class 1
-       |
-       v
-Threshold = 0.5
-       |
-       +----------------------+
-       |                      |
-    < 0.5                  >= 0.5
-       |                      |
-       v                      v
-       0                      1
-```
-
-Therefore:
-
-```text
-0 = Passenger predicted not to survive
-1 = Passenger predicted to survive
-```
+These probabilities are model estimates, not guarantees of an individual outcome.
 
 ## Machine Learning Concepts Covered
 
 - Machine Learning lifecycle
-- Data collection
-- Data exploration
-- Data cleaning
-- Missing-value analysis
+- Data collection and exploration
+- Data cleaning and missing-value analysis
 - Statistical analysis
 - Data visualization
 - Outlier detection
-- Feature engineering
-- Feature encoding
+- Feature engineering and encoding
 - Train-test split
-- Classification
+- Binary classification
 - Logistic Regression
 - Decision Trees
 - Random Forest
 - Model evaluation
 - Confusion matrix
-- Accuracy
-- Precision
-- Recall
-- F1 Score
+- Accuracy, precision, recall, and F1-score
 - Prediction probabilities
 - Model comparison
+- MLflow experiment tracking
 
 ## Data Engineering Concepts Covered
 
 - Databricks
-- Apache Spark
-- PySpark
+- Apache Spark and PySpark
 - Spark SQL
 - DataFrames
-- Transformations
-- Actions
-- Lazy Evaluation
-- Narrow and Wide Transformations
-- Shuffle
-- DAG
+- Transformations and actions
+- Lazy evaluation
+- Narrow and wide transformations
+- Shuffle and DAG
 - `explain()`
-- Joins
-- Aggregations
-- CSV
-- Parquet
+- Joins and aggregations
+- CSV and Parquet
 - Delta Lake
 - Partitioning
-- Schema Enforcement
-- Schema Evolution
+- Schema enforcement and evolution
 - Delta Table History
 - Time Travel
-- Data Lake concepts
+- Bronze / Silver / Gold architecture
 
 ## Architecture
 
@@ -615,7 +544,7 @@ Therefore:
                         v
                 +---------------+
                 |    Bronze     |
-                |  Raw Data     |
+                |   Raw Data    |
                 +-------+-------+
                         |
                         v
@@ -649,55 +578,40 @@ Therefore:
                 Model Evaluation
                         |
                         v
-                   Prediction
+                MLflow Tracking
+                        |
+                        v
+                 Model Comparison
+                        |
+                        v
+                  Best Candidate
+                        |
+                        v
+                    Prediction
 ```
 
 ## Final Result
 
-The project demonstrates a complete Machine Learning workflow using the Titanic dataset.
+This project demonstrates an end-to-end Machine Learning and Data Engineering workflow using the Titanic dataset.
 
-Three classification algorithms were trained and compared:
+The project combines data processing in Databricks, Delta Lake storage concepts, feature engineering, classification models, model evaluation, and MLflow experiment tracking.
 
-```text
-Logistic Regression
-Decision Tree
-Random Forest
-```
-
-The final selected model for this project was:
-
-```text
-Logistic Regression
-```
-
-with a test accuracy of:
-
-```text
-82.68%
-```
-
-| Model | Accuracy | Precision | Recall | F1 |
-|---|---:|---:|---:|---:|
-| Logistic Regression | **82.68%** | 78.67% | **79.73%** | **79.19%** |
-| Decision Tree | 80.45% | 76.71% | 75.68% | 76.19% |
-| Random Forest | **82.68%** | **81.16%** | 75.68% | 78.32% |
-
-The project combines Machine Learning, Data Engineering, Databricks, Apache Spark, and Delta Lake into an end-to-end pipeline.
+The three models were trained and compared, with **Random Forest currently leading on recorded test accuracy at approximately 82.70%**.
 
 ## Future Improvements
 
-Possible future improvements include:
+Potential next steps include:
+
 - Hyperparameter tuning
 - Cross-validation
 - Feature selection
-- Handling class imbalance
 - Model explainability
-- MLflow experiment tracking
+- Further MLflow experiment comparison
+- Model registration and versioning
 - Databricks Jobs / Workflows
 - Automated ETL pipeline
-- Model deployment
-- Prediction API
-- Streamlit interface
+- Model serving or prediction API
+- Streamlit interface and deployment
 
 ## Author
 
