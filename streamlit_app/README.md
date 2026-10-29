@@ -1,8 +1,8 @@
 # Titanic Survival Predictor
 
-## Live Demo
+## **LIVE DEMO**
 
-[LIVE TITANIC SURVIVAL PREDICTOR]([YOUR_STREAMLIT_APP_URL](https://titanic-databricks-ml-pipeline-whqwha8bhpnfpwahegjm4w.streamlit.app/))
+[LIVE TITANIC SURVIVAL PREDICTOR](https://titanic-databricks-ml-pipeline-whqwha8bhpnfpwahegjm4w.streamlit.app/)
 
 A machine learning web application that predicts Titanic passenger survival using a trained Logistic Regression model deployed through Databricks Model Serving.
 
