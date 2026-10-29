@@ -1,5 +1,17 @@
 # Titanic — End-to-End Machine Learning Pipeline
 
+
+# 🚢 Titanic Survival Prediction
+
+### Try the Live Application
+
+**[👉 OPEN THE TITANIC SURVIVAL PREDICTOR](https://titanic-databricks-ml-pipeline-whqwha8bhpnfpwahegjm4w.streamlit.app/)**
+
+Explore an end-to-end machine learning project built with Python, Scikit-learn, Databricks, MLflow, and Streamlit.
+
+---
+
+
 An end-to-end Machine Learning and Data Engineering project using the Titanic dataset, built with Python, PySpark, Databricks, Delta Lake, Pandas, Scikit-learn, Matplotlib, and Seaborn.
 
 The project covers the complete workflow from data collection and exploration to feature engineering, model training, evaluation, model comparison, and prediction.
